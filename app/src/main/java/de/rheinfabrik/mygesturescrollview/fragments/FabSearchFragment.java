@@ -24,7 +24,7 @@ public class FabSearchFragment extends Fragment implements GestureDetector.OnGes
     private static final String TAG = FabSearchFragment.class.getSimpleName();
 
     @InjectView(R.id.searchFragmentRoot)
-    RelativeLayout mSearchFragmentRoot;
+    TouchInterceptingRelativeLayout mSearchFragmentRoot;
 
     private GestureDetectorCompat mDetector;
 
@@ -76,16 +76,16 @@ public class FabSearchFragment extends Fragment implements GestureDetector.OnGes
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         Log.d(TAG, event.toString());
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            int viewYPos = (int) mSearchFragmentRoot.getY();
-            if (viewYPos < mSearchFragmentRoot.getHeight() / 4) {
-                mSearchFragmentRoot.animate().translationY(0).setDuration(200).start();
-            } else {
-                mSearchFragmentRoot.animate().translationY(mSearchFragmentRoot.getHeight()).setDuration(500).start();
-
-            }
-
-        }
+//        if (event.getAction() == MotionEvent.ACTION_UP) {
+//            int viewYPos = (int) mSearchFragmentRoot.getY();
+//            if (viewYPos < mSearchFragmentRoot.getHeight() / 4) {
+//                mSearchFragmentRoot.animate().translationY(0).setDuration(200).start();
+//            } else {
+//                mSearchFragmentRoot.animate().translationY(mSearchFragmentRoot.getHeight()).setDuration(500).start();
+//
+//            }
+//
+//        }
 
         return this.mDetector.onTouchEvent(event);
     }

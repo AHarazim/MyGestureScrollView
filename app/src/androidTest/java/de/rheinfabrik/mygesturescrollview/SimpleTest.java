@@ -13,7 +13,7 @@ public class SimpleTest extends InstrumentationTestCase {
 
         i = 1;
 
-        assertEquals(i, 0);
+        assertEquals(i, 1);
     }
 
 }

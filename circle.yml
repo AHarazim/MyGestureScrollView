@@ -1,4 +1,8 @@
 
+machine:
+  environment:
+    ADB_INSTALL_TIMEOUT: 8
+
 general: 
     artifacts:
         - /home/ubuntu/MyGestureScrollView/app/build/outputs/reports/androidTests/connected

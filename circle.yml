@@ -17,7 +17,7 @@ test:
     # wait for it to have booted
     - circle-android wait-for-boot
     # run tests  against the emulator.
-    - ./gradlew connectedAndroidTest --info
+    - ./gradlew clean connectedAndroidTest --info
     # copy the build outputs to artifacts
     - cp -r /home/ubuntu/MyGestureScrollView/app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.

@@ -1,41 +1,24 @@
-# Build configuration file for Circle CI
-#
-#
-# ANDROID_API_LEVEL 19
-# ANDROID_BUILD_TOOLS_VERSION (20.0.0)
-#
 
 general: 
     artifacts:
         - /home/ubuntu/MyGestureScrollView/app/build/outputs/reports/androidTests/connected
 
-machine:
-    environment:
-        ANDROID_HOME: /home/ubuntu/android
-    java:
-        version: oraclejdk6
-
-
 dependencies:
     cache_directories:
         - ~/.android
         - ~/android
-    pre:
-       - (source scripts/envsetup.sh && ensureDependenciesAndCreateAVD)
-    override:
-       - (echo "overriding `gradlew dependencies`")
 
 test:
-    pre:
-        - $ANDROID_HOME/tools/emulator -avd testAVD -no-skin -no-audio -no-window:
-           background: true
-        - (./gradlew assembleDebug):
-            timeout: 360
-        - (./gradlew assembleAndroidTest):
-            timeout: 360
-        - (source scripts/envsetup.sh && waitAVD)
-    override:
-        - (echo "Override")
-        - (./gradlew :app:connectedAndroidTest)
-    post:
-        - cp -R ./app/build/outputs/reports/androidTests/connected $CIRCLE_ARTIFACTS
+  override:
+    # start the emulator
+    - emulator -avd circleci-android22 -no-audio -no-window:
+        background: true
+        parallel: true
+    # wait for it to have booted
+    - circle-android wait-for-boot
+    # run tests  against the emulator.
+    - ./gradlew connectedAndroidTest
+    # copy the build outputs to artifacts
+    - cp -r MyGestureScrollView/app/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r MyGestureScrollView/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS

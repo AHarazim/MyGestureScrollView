@@ -10,12 +10,20 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+      - run: 
+          name: Emulator
+          command: emulator -avd circleci-android24 -no-window -gpu off:
+                      background: true
+                      parallel: true
+          command: circle-android wait-for-boot
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
+            - ~/.android
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests

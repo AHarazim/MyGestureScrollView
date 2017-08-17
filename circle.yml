@@ -10,12 +10,13 @@ general:
 dependencies:
     cache_directories:
         - ~/.android
-        - ~/android
+        - ~/android 
+        - ~/.gradle
 
 test:
   override:
     # start the emulator
-    - emulator -avd circleci-android22 -no-audio -no-window:
+    - emulator -avd circleci-android24 -no-audio -no-window:
         background: true
         parallel: true
     # wait for it to have booted

@@ -10,7 +10,6 @@ general:
 dependencies:
     cache_directories:
         - ~/.android
-        - ~/android 
         - ~/.gradle
 
 test:

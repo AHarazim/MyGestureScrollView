@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import de.rheinfabrik.mygesturescrollview.R;
 
@@ -23,7 +22,7 @@ public class FabSearchFragment extends Fragment implements GestureDetector.OnGes
 
     private static final String TAG = FabSearchFragment.class.getSimpleName();
 
-    @InjectView(R.id.searchFragmentRoot)
+    @BindView(R.id.searchFragmentRoot)
     TouchInterceptingRelativeLayout mSearchFragmentRoot;
 
     private GestureDetectorCompat mDetector;
@@ -38,7 +37,7 @@ public class FabSearchFragment extends Fragment implements GestureDetector.OnGes
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_fab_search, container, false);
         rootView.setOnTouchListener(this);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         mDetector = new GestureDetectorCompat(getActivity(), this);
 //        getActivity().getSupportFragmentManager().beginTransaction()
